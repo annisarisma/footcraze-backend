@@ -1,3 +1,11 @@
+# <p align="center"> <a href="https://emoji.gg/emoji/1782_MinecraftTorch"><img src="https://cdn3.emoji.gg/emojis/1782_MinecraftTorch.gif" width="64px" height="64px" alt="MinecraftTorch"></a> Welcome to Footcraze Backend <a href="https://emoji.gg/emoji/1782_MinecraftTorch"><img src="https://cdn3.emoji.gg/emojis/1782_MinecraftTorch.gif" width="64px" height="64px" alt="MinecraftTorch"></a> </p>
+
+
+### Hi there! I'm making a backend of Footcraze application using laravel to build API through JSON response. Here some source code that I build and enjoy!
+
+### ✌️ Pssttt.. Since its really dark here, so I get a torch in up there :) Hope it light you well. 💁‍♀️
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
