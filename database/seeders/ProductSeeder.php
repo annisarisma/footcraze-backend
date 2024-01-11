@@ -54,6 +54,15 @@ class ProductSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'categories_id' => 4,
+                'name' => 'New Balance Fresh Foam H',
+                'price' => 129.99,
+                'description' => 'Versatile running shoes with Fresh Foam X technology.',
+                'tags' => 'running, New Balance, Fresh Foam X',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // ...
         ];
 
