@@ -77,9 +77,6 @@ class UserController extends Controller
                 $user = User::findOrFail(auth()->id());
                 $tokenResult = $user->createToken('authToken')->plainTextToken;
 
-                // Session Generate
-                $request->session()->regenerate();
-
                 // Return JSON
                 return ResponseFormatter::success([
                     'access_token' => $tokenResult,
