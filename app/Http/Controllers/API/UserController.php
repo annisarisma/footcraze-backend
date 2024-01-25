@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -53,6 +54,54 @@ class UserController extends Controller
             ], 'Authentication Failed', 500);
         }
     }
+
+    /**
+     * Login the form for creating a new resource.
+     */
+    public function login(Request $request)
+    {
+        // Try Catch
+        try {
+            // Request Validate
+            $request->validate([
+                'email' => 'email|required',
+                'password' => 'required'
+            ]);
+
+            // Check Remember
+            $remember = $request->has('remember') ? true : false;
+
+            // Credential Auth
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+                // Token Generate
+                $user = User::findOrFail(auth()->id());
+                $tokenResult = $user->createToken('authToken')->plainTextToken;
+
+                // Session Generate
+                $request->session()->regenerate();
+
+                // Return JSON
+                return ResponseFormatter::success([
+                    'access_token' => $tokenResult,
+                    'token_type' =>'Bearer',
+                    'user' => $user
+                ], 'User Login Successfully');
+            }
+
+            // Credential Failed
+            return ResponseFormatter::error([
+                'message' => 'Unauthorized'
+            ], 'Authentication Failed', 500);
+
+        } catch (Exception $error) {
+            // Return JSON
+            return ResponseFormatter::error([
+                'message' => 'Something Went Wrong',
+                'error' => $error
+            ], 'Authenticate Failed', 500);
+        }
+    }
+    
 
     /**
      * Show the form for creating a new resource.
