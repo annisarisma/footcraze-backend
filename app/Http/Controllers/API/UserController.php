@@ -98,6 +98,15 @@ class UserController extends Controller
             ], 'Authenticate Failed', 500);
         }
     }
+
+    public function fetch (Request $request)
+    {
+        // Return JSON
+        return ResponseFormatter::success(
+            $request->user(),
+            'Data Profile User Successfully'
+        );
+    }
     
 
     /**
