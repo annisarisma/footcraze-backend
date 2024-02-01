@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
    Route::get('user', [UserController::class, 'fetch']); 
    Route::post('user', [UserController::class, 'update']);
    Route::get('transaction', [TransactionController ::class, 'index']);
+   Route::post('transaction-store', [TransactionController ::class, 'store']);
 });
 Route::get('products', [ProductController::class, 'all']);
 Route::get('categories', [ProductCategoryController::class, 'index']);

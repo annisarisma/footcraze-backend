@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\TransactionItem;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
@@ -65,7 +66,38 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Request Validate
+        $request->validate([
+            'items' => ['required', 'array'],
+            'items.*.id' => ['exists:products,id'],
+            'total_price' => ['required'],
+            'shipping_price' => ['required'],
+            'status' => ['required', 'in:PENDING']
+        ]);
+
+        // Store Data Transaction
+        $transaction = Transaction::create([
+            'user_id' => Auth::user()->id,
+            'address' => $request->address,
+            'total_price' => $request->total_price,
+            'shipping_price' => $request->shipping_price,
+            'status' => $request->status
+        ]);
+
+        // Store Data Transaction Item
+        foreach ($request->items as $product) {
+            TransactionItem::create([
+                'user_id' => Auth::user()->id,
+                'transaction_id' => $transaction->id,
+                'product_id' => $product['id'],
+                'quantity' => $product['quantity']
+            ]);
+        }
+
+        // Return JSON
+        return ResponseFormatter::success([
+            'transaction' => $transaction->load('items.product')
+        ], 'Checkout Successfully');
     }
 
     /**
