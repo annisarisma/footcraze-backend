@@ -77,7 +77,7 @@ class TransactionController extends Controller
 
         // Store Data Transaction
         $transaction = Transaction::create([
-            'user_id' => Auth::user()->id,
+            'users_id' => Auth::user()->id,
             'address' => $request->address,
             'total_price' => $request->total_price,
             'shipping_price' => $request->shipping_price,
@@ -87,9 +87,9 @@ class TransactionController extends Controller
         // Store Data Transaction Item
         foreach ($request->items as $product) {
             TransactionItem::create([
-                'user_id' => Auth::user()->id,
-                'transaction_id' => $transaction->id,
-                'product_id' => $product['id'],
+                'users_id' => Auth::user()->id,
+                'transactions_id' => $transaction->id,
+                'products_id' => $product['id'],
                 'quantity' => $product['quantity']
             ]);
         }

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
    Route::get('user', [UserController::class, 'fetch']); 
    Route::post('user', [UserController::class, 'update']);
+   Route::post('logout', [UserController::class, 'logout']);
    Route::get('transaction', [TransactionController ::class, 'index']);
    Route::post('transaction-store', [TransactionController ::class, 'store']);
 });
